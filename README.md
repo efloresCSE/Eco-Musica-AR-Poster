@@ -31,7 +31,7 @@ By scanning the poster with a mobile device, users can unlock animated 3D assets
 
 ## 🖼️ Poster Example
 
-> 
+> ![Eco-Musica Poster](./Assets/eco-musica-ar-poster-target-image.png)
 
 ---
 
