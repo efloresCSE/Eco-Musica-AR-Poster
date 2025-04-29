@@ -1,0 +1,301 @@
+<!-- Splash Screen for Background Music. Autoplay restrictions on mobile often 
+require some user interaction before playing audio-->
+<div id="splashimage">
+    <div id="start" style="display: none">
+      <h2>Start AR</h2>
+    </div>
+  </div>
+  
+  <a-scene
+    splash-image
+    xrextras-gesture-detector
+    landing-page
+    xrextras-loading
+    xrextras-runtime-error
+    renderer="colorManagement:true; webgl2: true;"
+    xrweb="disableWorldTracking: true">
+    <!-- ASSETS: Your PNGs -->
+    <a-assets timeout="10000">
+      <img id="boy-spirit" src="assets/eco-ar-boy-spirit.png" />
+      <img id="fish-01" src="assets/eco-ar-fish-04.png" />
+      <img id="leaves" src="assets/eco-ar-leaves.png" />
+      <img id="moon" src="assets/eco-ar-moon.png" />
+      <img id="cloud-01" src="assets/eco-ar-cloud-01.png" />
+      <img id="cloud-02" src="assets/eco-ar-cloud-02.png" />
+      <img id="rock-01" src="assets/eco-ar-rock-01.png" />
+      <img id="rock-02" src="assets/eco-ar-rock-02.png" />
+      <img id="rock-03" src="assets/eco-ar-rock-03.png" />
+      <img id="wave-bg-small" src="assets/wave-bg-small.png" />
+      <img id="wave-fg-small" src="assets/wave-fg-small.png" />
+      <img id="wave-fg2-small" src="assets/wave-fg2-small.png" />
+      <img id="play-button" src="assets/play-button.png" />
+      <img id="play-button2" src="assets/play-button.png" />
+      <img id="play-flower" src="assets/play-button-flower.png" />
+      <img id="backdrop" src="assets/eco-ar-backdrop-small.png" />
+    </a-assets>
+  
+    <!-- ASSETS: Audio and Video -->
+    <a-assets>
+      <audio
+        id="magical-music"
+        preload="auto"
+        class="a-sound"
+        src="./assets/Music/Whispering_Waters.mp3"
+        response-type="arraybuffer"></audio>
+      <audio
+        id="flower-chime-01"
+        src="./assets/Music/guitar-chime.mp3"
+        class="a-sound"
+        preload="auto"
+        response-type="arraybuffer"></audio>
+      <audio
+        id="flower-chime-02"
+        src="./assets/Music/wind-chimes.mp3"
+        class="a-sound"
+        preload="auto"
+        response-type="arraybuffer"></audio>
+      <video
+        id="myVideo"
+        src="./assets/ecomusica-vid.mp4"
+        crossorigin="anonymous"
+        playsinline
+        preload="metadata"></video>
+    </a-assets>
+  
+    <!-- CAMERA + LIGHTING -->
+    <a-camera position="0 1.6 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity id="bgMusic" sound="src: #magical-music; volume: 0.1; loop: true;"></a-entity>
+    </a-camera>
+  
+    <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+    <a-light type="ambient" intensity="0.7"></a-light>
+  
+    <!-- TRACKED TO POSTER -->
+    <xrextras-named-image-target name="eco-musica-ar-poster-target-image-02">
+      <!-- Slightly larger and higher boy-spirit closer to the poster -->
+      <a-image
+        class="fade-group"
+        src="#boy-spirit"
+        width="0.25"
+        height="0.585"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="0 -0.05 0.0166"
+        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; from: 0 -0.07 0.05; to: 0 -0.0466 0.05; loop: true">
+      </a-image>
+  
+      <!-- Adding backdrop-->
+      <a-image src="#backdrop" width="0.9" height="1.2" rotation="0 0 0" position="0 -0.116 -0.0166">
+      </a-image>
+  
+      <!-- Adding Rotating flower w/ chime that links to ad astra page-->
+      <a-image
+        id="sound-link"
+        class="fade-group cantap"
+        sound="src: #flower-chime-02; volume: 1.0"
+        src="#play-button"
+        width="0.05"
+        height="0.05"
+        transparent="true"
+        rotation="0 0 0"
+        alpha-test="0.5"
+        position="0.266 0.033 0.033"
+        play-sound-redirect="url: https://www.adastramedia.org/eco-musica; delay: 2000"></a-image>
+      <a-image
+        class="fade-group"
+        src="#play-flower"
+        width="0.1"
+        height="0.1"
+        rotation="0 0 0"
+        position="0.266 0.033 0.026"
+        animation="property: rotation; to: 0 0 360; dur: 4000; easing: linear; loop: true"></a-image>
+  
+      <!-- Adding Moon (not sure if will be used) -->
+      <a-image
+        class="fade-group"
+        src="#moon"
+        width="0.08"
+        height="0.08"
+        rotation="0 0 0"
+        position="0.183 0.283 0.016">
+      </a-image>
+  
+      <a-plane
+        class="fade-group"
+        color="#ffffff"
+        width="0.133"
+        height="0.4"
+        position="0.133 0.033 0.013"
+        rotation="-90 0 0"
+        material="opacity: 0.1; shader: flat; transparent: true">
+      </a-plane>
+  
+      <!-- Dimmer background for theater mode -->
+      <a-plane
+        id="theaterDimmer"
+        color="#000000"
+        width="3"
+        height="3"
+        position="0 0 0.049"
+        rotation="0 0 0"
+        visible="false"
+        material="opacity: 0.0; transparent: true; shader: flat;">
+      </a-plane>
+  
+      <a-entity
+        class="cantap"
+        play-video="videoId: myVideo; buttonId: playButton2"
+        position="-0.25 -0.05 0">
+        <!-- Video Plane (also tappable for pause) -->
+        <a-plane
+          id="videoPlane"
+          class="cantap"
+          material="shader: flat; src: #myVideo"
+          width="0.15"
+          height="0.15"
+          position="0 0 0">
+        </a-plane>
+  
+        <!-- Play Button -->
+        <a-image
+          id="playButton2"
+          class="cantap"
+          src="#play-button2"
+          width="0.04"
+          height="0.04"
+          position="0 0 0.01"
+          visible="true">
+        </a-image>
+      </a-entity>
+  
+      <!-- Hills will be used as place holder for rocks, will need final assets to complete adjustments  -->
+      <a-image
+        class="fade-group"
+        src="#rock-01"
+        width="0.233"
+        height="0.233"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="-0.266 -0.266 0.033"></a-image>
+      <a-image
+        class="fade-group"
+        src="#rock-03"
+        width="0.133"
+        height="0.133"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="-0.1 -0.266 0.15"></a-image>
+      <a-image
+        class="fade-group"
+        src="#rock-02"
+        width="0.233"
+        height="0.233"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="0.266 -0.166 0.016"></a-image>
+  
+      <!-- Clouds -->
+      <a-image
+        class="fade-group"
+        src="#cloud-01"
+        width="0.1083"
+        height="0.1083"
+        rotation="0 0 0"
+        position="0.2167 0.1667 0.0333"
+        animation="property: position; dir: alternate; dur: 8000; easing: easeInOutSine;
+               from: 0.2 0.1667 0.0333; to: 0.2333 0.1667 0.0333; loop: true"></a-image>
+  
+      <a-image
+        class="fade-group"
+        src="#cloud-02"
+        width="0.0667"
+        height="0.0667"
+        rotation="0 0 0"
+        position="-0.1333 0.3 0.0167"
+        scale="-1 1 1"
+        animation="property: position; dir: alternate; dur: 10000; easing: easeInOutSine;
+               from: -0.15 0.3 0.0167; to: -0.1167 0.3 0.0167; loop: true"></a-image>
+  
+      <a-image
+        class="fade-group"
+        src="#cloud-01"
+        width="0.1"
+        height="0.1"
+        rotation="0 0 0"
+        position="-0.2833 0.1667 0.0333"
+        scale="-1 1 1"
+        animation="property: position; dir: alternate; dur: 8000; easing: easeInOutSine;
+               from: -0.2667 0.1667 0.0333; to: -0.3 0.1667 0.0333; loop: true"></a-image>
+  
+      <a-image
+        class="fade-group"
+        src="#cloud-02"
+        width="0.0667"
+        height="0.0667"
+        rotation="0 0 0"
+        position="-0.2 0.0833 0.0667"
+        animation="property: position; dir: alternate; dur: 6000; easing: easeInOutSine;
+               from: -0.2167 0.0833 0.0667; to: -0.1833 0.0833 0.0667; loop: true"></a-image>
+  
+      <!-- Waves -->
+      <a-image
+        class="fade-group"
+        src="#wave-bg-small"
+        width="1"
+        height="0.1333"
+        rotation="0 0 0"
+        position="0 -0.25 0.0067"
+        transparent="true"
+        alpha-test="0.5"
+        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; 
+               to: 0.0333 -0.25 0.0067; from: -0.0333 -0.25 0.0067; loop: true"></a-image>
+  
+      <a-image
+        src="#wave-fg2-small"
+        width="1"
+        height="0.1333"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="0 -0.3167 0.0667"
+        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; 
+               to: -0.0333 -0.3167 0.0667; from: 0.0333 -0.3167 0.0667; loop: true"></a-image>
+  
+      <a-image
+        src="#wave-fg-small"
+        width="1"
+        height="0.1333"
+        rotation="0 0 0"
+        transparent="true"
+        alpha-test="0.5"
+        position="0 -0.3667 0.1533"
+        animation="property: position; dir: alternate; dur: 4000; easing: easeInOutSine; 
+               to: 0.0333 -0.3667 0.1533; from: -0.0333 -0.3667 0.1533; loop: true">
+      </a-image>
+  
+      <!-- Fish -->
+      <a-image
+        class="fade-group"
+        src="#fish-01"
+        width="0.0667"
+        height="0.0333"
+        transparent="true"
+        alpha-test="0.5"
+        fish-jump="speedX: 1.3; initialPosition: -0.3333 -0.25 0.0037; initialVelocityY: 2.3; gravity: -9.81; minDelay: 500; maxDelay: 2500">
+      </a-image>
+  
+      <a-image
+        src="#fish-01"
+        width="0.0833"
+        height="0.0833"
+        transparent="true"
+        alpha-test="0.5"
+        fish-movement="speedX: 0.1333; initialPosition: -0.3333 -0.3333 0.1517; distanceX: 0.6667; minDelay: 1000; maxDelay: 2500">
+      </a-image>
+    </xrextras-named-image-target>
+  </a-scene>
+  

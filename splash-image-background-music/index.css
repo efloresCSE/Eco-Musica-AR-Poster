@@ -1,0 +1,71 @@
+.hidden {
+    display: none !important;
+  }
+  
+  /*let's make this responsive*/
+  #splashimage {
+    z-index: 998;
+    height: 100%;
+    background-image: url('../assets/eco-landing.png'); /*splash screen path*/
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-size: cover;
+  }
+  
+  #start {
+    /*z-index: 999;*/
+    width: 50vw;
+    height: auto;
+    position: absolute;
+    bottom: 5vh;
+    left: 25vw;
+    background-color: #ad50ff;
+    border: 0.2em solid white;
+    text-align: center;
+    color: #fff;
+    border-radius: 100px;
+  }
+  
+  h2 {
+    font-size: 1.3em;
+    text-align: center;
+    font-family: monospace;
+  }
+  .hidden {
+    display: none !important;
+  }
+  
+  /*let's make this responsive*/
+  #splashimage {
+    z-index: 998;
+    height: 100%;
+    background-image: url('../assets/eco-landing.png'); /*splash screen path*/
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-size: cover;
+  }
+  
+  #start {
+    /*z-index: 999;*/
+    width: 50vw;
+    height: auto;
+    position: absolute;
+    bottom: 5vh;
+    left: 25vw;
+    background-color: #ad50ff;
+    border: 0.2em solid white;
+    text-align: center;
+    color: #fff;
+    border-radius: 100px;
+  }
+  
+  h2 {
+    font-size: 1.3em;
+    text-align: center;
+    font-family: monospace;
+  }
+    
