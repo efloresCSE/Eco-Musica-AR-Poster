@@ -29,6 +29,11 @@ By scanning the poster with a mobile device, users can unlock animated 3D assets
 
 ---
 
+## 🎥 Demo Video
+
+Experience the Eco-Musica AR Poster in action:  
+[📥 Download and watch the demo video (MP4)](./Assets/eco-musica-demo.mp4)
+
 ## 🖼️ Poster Example
 
 > ![Eco-Musica Poster](./Assets/eco-musica-ar-poster-target-image.png)
